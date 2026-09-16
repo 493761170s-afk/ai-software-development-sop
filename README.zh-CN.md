@@ -35,7 +35,7 @@ Stage 8 验收 / 发布 / 运维
 - 传统 SDLC 为主，AI 是执行资源。
 - Product / Design / Technical Contract / Tracker / Code & Test Evidence 各有唯一权威，禁止 Shadow SOT。
 - 一个 Live Tracker 维护实时状态，规划文档不重复维护进度。
-- Requirement / Work Item / Test 使用稳定 ID，不依赖 Jira、GitHub、云效等平台编号。
+- Requirement / Work Item / Test 使用稳定 ID，不依赖 Jira、GitHub Issues 等平台编号。
 - Scope、需求、AC、NFR、交互行为、API/DB/Event/File/AI/Provider 合同、工作边界和必测标准发生实质变化时，必须走 Change Control，并使受影响的旧 Review PASS 失效。
 - Bug 和 Change Request 分离。
 - 不允许通过删测试、降断言、skip、错误 snapshot、Mock 真实必测路径等方式“做绿”。
@@ -52,7 +52,7 @@ Stage 8 验收 / 发布 / 运维
 - [`utilities/`](utilities/)：独立审查、变更控制、事故/Hotfix、需求追溯、根因调试
 - [`templates/`](templates/)：Project Profile、Baseline Audit、Work Item、Authorization、Test、Defect、Review、Release 等模板
 - [`references/`](references/)：决策权、采用级别、审查有效性、多 Profile 叠加、Tracker 治理等
-- [`adapters/`](adapters/)：可选平台适配器
+- [`adapters/`](adapters/)：可选平台适配器；当前公开提供 Jira Adapter
 
 ## 快速接入
 
@@ -66,6 +66,10 @@ Stage 8 验收 / 发布 / 运维
 8. Stage 6–8 按工作项、测试、变更控制和精确证据推进。
 
 详细步骤见 [`docs/QUICK_START.md`](docs/QUICK_START.md)。
+
+## Jira 与其他 Tracker
+
+核心 SOP 不绑定具体任务管理平台。使用 Jira 时按 [`adapters/jira/`](adapters/jira/) 先发现实际 Issue Type、字段、Workflow、层级、依赖和 Sprint/Release 配置，再做分类、创建或迁移。GitHub Issues 或其他 Tracker 则按 [`references/tracker-governance.md`](references/tracker-governance.md) 的能力映射和降级规则执行。
 
 ## 关于这个公开仓库
 

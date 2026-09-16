@@ -77,12 +77,14 @@ REQUIRED_PATHS = [
     "profiles/media-processing.md",
     "profiles/automation-tool.md",
     "profiles/shared-platform.md",
-    "adapters/yunxiao/SKILL.md",
-    "adapters/yunxiao/MODELING_RULES.md",
-    "adapters/yunxiao/CARD_TEMPLATES.md",
-    "adapters/yunxiao/CLASSIFICATION_AUDIT.md",
+    "adapters/README.md",
+    "adapters/jira/SKILL.md",
+    "adapters/jira/MODELING_RULES.md",
+    "adapters/jira/ISSUE_TEMPLATES.md",
+    "adapters/jira/MIGRATION_AUDIT.md",
 ]
 
+ALLOWED_PUBLIC_ADAPTERS = {"jira"}
 MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 EMAIL_RE = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.IGNORECASE)
 SENSITIVE_PATTERNS = {
@@ -112,6 +114,14 @@ def check_required_paths(errors: list[str]) -> None:
     for relative in REQUIRED_PATHS:
         if not (ROOT / relative).exists():
             errors.append(f"missing required path: {relative}")
+
+
+def check_public_adapters(errors: list[str]) -> None:
+    adapters = ROOT / "adapters"
+    actual = {p.name for p in adapters.iterdir() if p.is_dir()}
+    unexpected = sorted(actual - ALLOWED_PUBLIC_ADAPTERS)
+    if unexpected:
+        errors.append(f"unreviewed public adapter directories: {', '.join(unexpected)}")
 
 
 def check_canonical_version(errors: list[str]) -> None:
@@ -175,6 +185,7 @@ def main() -> int:
     files = iter_text_files()
 
     check_required_paths(errors)
+    check_public_adapters(errors)
     check_canonical_version(errors)
     check_sensitive_text(files, errors)
     check_markdown_links(files, errors)

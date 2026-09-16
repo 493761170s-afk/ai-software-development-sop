@@ -40,7 +40,7 @@ The independent review is a gate between Stage 5 and Stage 6. It is not a ninth 
 - Traditional SDLC first; AI is an executor, not an uncontrolled product owner.
 - One authoritative source for each kind of fact; no shadow specifications or duplicate task ledgers.
 - One live tracker for execution status.
-- Stable requirement/work/test IDs remain independent of Jira, GitHub, Yunxiao, or other tracker keys.
+- Stable requirement/work/test IDs remain independent of Jira, GitHub Issues, or other tracker keys.
 - Requirements, behavior, API/DB/event/file/AI/provider contracts, NFRs, task boundaries, and required tests cannot be silently changed during coding.
 - Bugs and change requests are different workflows.
 - Tests may not be weakened, skipped, or rewritten merely to manufacture a green build.
@@ -86,7 +86,9 @@ See [`references/spec-kit-integration.md`](references/spec-kit-integration.md).
 
 ## Platform adapters
 
-Adapters are optional and must not change the mother SOP's governance gates. The first public adapter covers Yunxiao/Projex task modeling and safe migration. More adapters can be contributed without turning platform-specific details into lifecycle rules.
+Adapters are optional and must not change the mother SOP's governance gates. The first public adapter covers Jira issue modeling, readable issue content, and safe migration/reconciliation. The core tracker rules also support GitHub Issues and other systems through capability mapping and explicit degradation rules.
+
+See [`adapters/README.md`](adapters/README.md).
 
 ## Status and versioning
 

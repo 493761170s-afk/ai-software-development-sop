@@ -14,7 +14,8 @@ The public repository starts from the 4.1.x workflow line. Earlier private devel
 - Separate review PASS, owner gate, work authorization, merge, verification, acceptance, and release.
 - Provide project-type profiles, templates, change control, incident/hotfix handling, requirement traceability, and root-cause debugging utilities.
 - Define Spec Kit integration as `METHODOLOGY_ONLY` by default to avoid duplicate sources of truth.
-- Include optional Yunxiao/Projex collaboration modeling rules.
+- Include an optional Jira collaboration adapter for issue modeling, readable work items, and safe migration/reconciliation.
+- Keep the core tracker model compatible with Jira, GitHub Issues, and other systems through explicit capability mapping.
 - Publish under Apache-2.0 with a clean public history that excludes private project-specific adapters and private business facts.
 
 ### Versioning policy

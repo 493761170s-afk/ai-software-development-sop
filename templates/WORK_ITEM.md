@@ -1,6 +1,6 @@
 # Work Item Contract
 
-这是通用合同字段清单，不是要原样粘贴到所有 Tracker 卡片。云效项目按[中文卡片模板](../adapters/yunxiao/CARD_TEMPLATES.md)渲染：目标/交付/范围/验收在前，来源与授权在后；不丢本模板的适用字段，也不复制整篇规格。
+这是通用合同字段清单，不是要原样粘贴到所有 Tracker 卡片。Jira项目可按 [Issue Templates](../adapters/jira/ISSUE_TEMPLATES.md) 组织可读Issue内容：目标/交付/范围/验收在前，来源与授权在后；不丢本模板的适用字段，也不复制整篇规格。其他Tracker使用等价结构即可。
 
 **Stable Work ID:**  
 **Tracker Key:**  

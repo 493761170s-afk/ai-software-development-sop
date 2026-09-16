@@ -1,6 +1,6 @@
 ---
 name: software-development-sop
-description: 通用传统软件开发生命周期与工程治理。Stage 1–5完成且另一个独立模型全面审查通过后才允许正式Coding；人工/AI共用产物、任务与授权边界，支持SaaS、Web、服务、AI、游戏、数据、媒体等项目；采用云效时路由项目协作建模、中文卡片与安全导入规则。
+description: 通用传统软件开发生命周期与工程治理。Stage 1–5完成且另一个独立模型全面审查通过后才允许正式Coding；人工/AI共用产物、任务与授权边界，支持SaaS、Web、服务、AI、游戏、数据、媒体等项目；采用Jira时路由项目协作建模、Issue模板与安全迁移规则。
 ---
 
 # Software Development SOP — 4.1.0
@@ -21,7 +21,7 @@ description: 通用传统软件开发生命周期与工程治理。Stage 1–5�
 | 多Profile及交叉风险 | [profile-overlay](references/profile-overlay.md) |
 | 实验隔离与正式转入 | [experiment-promotion](references/experiment-promotion.md) |
 | 生产止损/热修复 | [incident-hotfix](utilities/incident-hotfix/SKILL.md) |
-| 云效项目协作建模、中文卡片与安全整改 | [yunxiao-project-collaboration](adapters/yunxiao/SKILL.md) |
+| Jira项目协作建模、Issue模板与安全迁移 | [jira-project-collaboration](adapters/jira/SKILL.md) |
 
 ## 2. Engineering Constitution — 不可覆盖
 
@@ -93,7 +93,7 @@ MVA/STANDARD/STRICT按质量矩阵执行；高风险和Profile必需项不得降
 
 native implement/converge不得绕过Tracker、独立审查和授权。新发现任务先进入变更/规划，不自动实现。正式执行期Tracker是唯一状态/负责人/依赖来源；卡片引用合同而不重新定义API/DB。Stable Work ID作导入幂等键，UNKNOWN_CREATE_RESULT先查重，不盲重建。能力不足按 [tracker-governance](references/tracker-governance.md)如实降级。
 
-采用或准备采用云效 Projex 时，Stage 2 需求落卡、Stage 5 Tracker 接管以及后续批量创建/重分类/中文化之前，必须读取[云效适配器](adapters/yunxiao/SKILL.md)，执行分类审查，再按批准计划映射。WBS 章节不能机械变成需求或迭代；需求分解、依赖和交付归属分别建模。统一语义和可读性，不强制所有项目采用相同数量或迭代节奏。该适配不改变母 SOP Gate，不自动授权编码或项目整改。
+采用或准备采用 Jira 时，Stage 2 需求落卡、Stage 5 Tracker 接管以及后续批量创建、重分类或迁移之前，必须读取 [Jira Adapter](adapters/jira/SKILL.md)，先发现目标项目真实的 Issue Type、字段、Workflow、层级、依赖和 Sprint/Release 配置，再执行分类审查与映射。WBS章节不能机械变成Issue或Sprint；需求分解、工程依赖和交付归属分别建模。该适配不改变母SOP Gate，也不自动授权编码、合并、验收或发布。
 
 ## 7. 执行与最小读取集
 

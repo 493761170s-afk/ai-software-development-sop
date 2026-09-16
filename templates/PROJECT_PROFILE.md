@@ -48,7 +48,7 @@ PLATFORM_ADAPTERS: []
 TRACKER_CLASSIFICATION_AUDIT_LOCATION:
 TRACKER_ACCESS_ROUTE_RECORD_LOCATION:
 TRACKER_SCHEMA_MAPPING_RECORD_LOCATION:
-TRACKER_CONTENT_LANGUAGE: zh-CN
+TRACKER_CONTENT_LANGUAGE: en | project-defined
 ITERATION_MODE: TIMEBOXED | DELIVERY_BATCH | KANBAN
 ITERATION_POLICY_LOCATION:
 DOCUMENT_CODE_AUTHORITY_AND_SYNC_POLICY_LOCATION:
@@ -115,8 +115,8 @@ RISK_FLAGS:
 
 风险flags为模板占位，项目接入必须逐项核验并记录依据；默认false不证明没有风险。
 
-## 云效项目协作（采用时填写）
+## Jira项目协作（采用时填写）
 
-采用或准备采用 Projex 时，`PLATFORM_ADAPTERS` 登记 `adapters/yunxiao/SKILL.md`，并按[云效适配器](../adapters/yunxiao/SKILL.md)登记分类审查、真实访问路径、动态配置映射和迭代策略。其他平台可将这些适配项明确标为不适用，不要求迁到云效。
+使用或准备采用 Jira 时，`PLATFORM_ADAPTERS` 登记 `adapters/jira/SKILL.md`，并按 [Jira Adapter](../adapters/jira/SKILL.md) 记录项目身份、Issue Type/Hierarchy、字段与允许值、Workflow/Transition、Link/Dependency、Sprint/Release、成员解析、权限和真实访问方式。未采用 Jira 的项目使用自身Tracker映射，不需要迁移平台。
 
-项目绑定、已验证 ID 与版本/发现时间可以存于项目映射；PAT、私钥和其他凭据只能保存安全引用。访问方式按实际客户端验证，不从示例继承某台服务器路径。采用 GitHub 规划、Codeup 开发时，明确批准文档的生效规则与限定路径同步，禁止双主进度和开发后整仓覆盖。
+项目绑定、已验证 ID/Key 与配置发现时间可以存于项目映射；PAT、API token、私钥和其他凭据只能保存安全引用。采用 Jira 管理工作、GitHub 管理代码时，明确 Jira 是 Live Tracker、GitHub 是代码/PR/CI 权威，并只维护引用关系，禁止形成第二个实时进度账本。

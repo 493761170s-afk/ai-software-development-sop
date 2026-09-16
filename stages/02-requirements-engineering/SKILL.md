@@ -32,7 +32,9 @@ Spec Kit 默认只作为方法论：Specify → Clarify → Analyze。所有结�
 
 ## 映射到项目协作工具
 
-采用云效 Projex 时，在需求落卡前读取[云效建模规则](../../adapters/yunxiao/MODELING_RULES.md)。保留产品/系统能力和可验收 NFR 的需求身份；实现步骤与纯验收执行清单交给 Stage 5 作为工程/测试任务映射。不要把每个规格小节、里程碑或功能编号机械新建为需求，不以其他项目的需求数量作为目标。中文卡片应保留 WHAT/WHY/WHO 和可观察 AC，而不是只翻译标题。
+采用 Jira 时，在需求落卡前读取 [Jira建模规则](../../adapters/jira/MODELING_RULES.md)，并先发现目标项目真实配置。保留产品/系统能力和可验收 NFR 的需求身份；实现步骤与纯验收执行清单交给 Stage 5 作为工程/测试工作映射。不要把每个规格小节、里程碑或功能编号机械新建为Issue，也不要假定所有项目都存在相同的Epic/Story/Task层级。Issue内容应保留 WHAT/WHY/WHO 和可观察 AC，而不是只复制标题。
+
+其他Tracker按 [tracker-governance](../../references/tracker-governance.md) 做能力映射和降级，不为了适配工具改变需求语义。
 
 ## Stable IDs
 
@@ -45,7 +47,7 @@ RULE-xxx      Business Rule
 AC-xxx        Acceptance Criterion
 ```
 
-Stable ID 不能等于 Jira Key。
+Stable ID 不能等于 Jira Key 或其他 Tracker Key。
 
 ## Requirement Gap
 

@@ -19,7 +19,7 @@ Project
             └── Work Item / Task
 ```
 
-以上是规划分析维度，不是要求 Tracker 为每层都创建对象，也不是“迭代 → 需求 → 任务 → 缺陷”的固定树。采用云效时按[建模规则](../../adapters/yunxiao/MODELING_RULES.md)区分需求分解、依赖和交付归属；里程碑不自动成为迭代。
+以上是规划分析维度，不是要求 Tracker 为每层都创建对象，也不是“迭代 → 需求 → 任务 → 缺陷”的固定树。采用 Jira 时按 [Jira建模规则](../../adapters/jira/MODELING_RULES.md) 区分产品分解、工程依赖和交付归属，并以目标项目实际 Issue Type/Hierarchy/Link/Sprint/Release 配置为准；里程碑不自动成为Sprint。
 
 任务必须按**可独立开发、Review、验证**的边界拆分，不能只写“前端一周 / 后端一周 / 完成 XX 模块”。
 
@@ -141,7 +141,9 @@ Requirement/Design ready
 - Stable Work ID ↔ Tracker Key 建立映射；
 - 批量创建必须幂等；未知结果先查询，不重复创建。
 
-云效项目在接管前必须执行[分类审查与安全整改](../../adapters/yunxiao/CLASSIFICATION_AUDIT.md)，证明所有批准需求/AC/NFR、工程工作和必需验证有完整去向，并采用[中文卡片模板](../../adapters/yunxiao/CARD_TEMPLATES.md)。不得机械为每个开发任务复制测试卡、为工程任务虚构产品需求，或为了填满迭代页面伪造排期。既有项目先复用、再按批准计划整改；实质拆分/合并和依赖变化仍走变更控制。
+Jira项目在接管前必须执行 [Migration / Classification Audit](../../adapters/jira/MIGRATION_AUDIT.md)，证明所有批准需求/AC/NFR、工程工作和必需验证有完整去向，并按 [Issue Templates](../../adapters/jira/ISSUE_TEMPLATES.md) 保持Issue可读。不得机械为每个开发任务复制测试Issue、为工程任务虚构产品Story，或为了填满Board/Sprint伪造排期。既有项目先复用、再按批准计划整改；实质拆分/合并、层级或依赖变化仍走变更控制。
+
+其他Tracker使用 [tracker-governance](../../references/tracker-governance.md) 的Capability Matrix和降级规则，保持相同的Stable ID、边界、证据与授权要求。
 
 ## 8. Stage 5准出：送审包准备完成
 
