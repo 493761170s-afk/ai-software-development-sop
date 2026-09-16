@@ -1,0 +1,42 @@
+name: Workflow defect or ambiguity
+description: Report a contradiction, unsafe path, broken link, or rule that cannot be executed as written.
+title: "[Defect] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a concrete workflow problem. Please avoid posting credentials, customer data, or private repository details.
+  - type: textarea
+    id: location
+    attributes:
+      label: Rule or file
+      description: Identify the file/section or lifecycle stage involved.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is contradictory, unsafe, ambiguous, or not executable?
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Concrete failure scenario
+      description: Describe how the current rule can fail in a real software project.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should the workflow require instead?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or references
+      description: Optional public links, standards, or reproduction notes. Do not include secrets or private data.

@@ -1,0 +1,50 @@
+name: Improvement proposal
+description: Propose a reusable lifecycle, profile, template, adapter, or validation improvement.
+title: "[Proposal] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposals should improve reusable software-development governance rather than encode one private project's business rules.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What recurring engineering problem or gap does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current behavior
+      description: How does the current SOP handle this today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the minimum reusable change.
+    validations:
+      required: true
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Expected version impact
+      options:
+        - Patch — wording/template correction without gate changes
+        - Minor — compatible capability/profile/adapter addition
+        - Major — authorization/testing/release/pre-coding gate semantics change
+    validations:
+      required: true
+  - type: textarea
+    id: migration
+    attributes:
+      label: Adoption or migration impact
+      description: What should existing adopters do, if anything?
+  - type: textarea
+    id: validation
+    attributes:
+      label: How should this be validated?
+      description: Include failure scenarios or regression checks that would prove the change is correct.
