@@ -72,6 +72,8 @@ See [`SKILL.md`](SKILL.md) for the normative engineering constitution.
 
 More detail: [`docs/QUICK_START.md`](docs/QUICK_START.md).
 
+For a complete installation, use [`manifest.txt`](manifest.txt) as the required public skill payload. Repository CI verifies that the manifest matches the approved install set, every listed file exists, internal links resolve, sensitive patterns are absent, and only reviewed public platform adapters are present.
+
 ## Project types
 
 Profiles can be combined. The current suite includes SaaS, web apps, admin/backoffice systems, mobile apps, desktop apps, backend services, AI products, games, data pipelines, media processing, automation tools, and shared platforms.
@@ -101,6 +103,10 @@ Semantic versioning is used for the workflow suite:
 - **Major:** changes to authorization, testing, release, or pre-coding gate semantics.
 
 See [`CHANGELOG.md`](CHANGELOG.md).
+
+## Public roadmap
+
+The first public maintenance cycle is tracked in [Issue #1](https://github.com/shinnslab/ai-software-development-sop/issues/1). Public roadmap items must remain reusable, vendor-neutral, and backed by real maintenance or adoption evidence.
 
 ## Contributing
 
