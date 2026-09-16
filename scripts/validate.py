@@ -14,13 +14,7 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 
-REQUIRED_PATHS = [
-    "README.md",
-    "README.zh-CN.md",
-    "LICENSE",
-    "CONTRIBUTING.md",
-    "SECURITY.md",
-    "CHANGELOG.md",
+INSTALL_PATHS = [
     "SKILL.md",
     "docs/QUICK_START.md",
     *[f"stages/{n:02d}-{slug}/SKILL.md" for n, slug in [
@@ -84,6 +78,19 @@ REQUIRED_PATHS = [
     "adapters/jira/MIGRATION_AUDIT.md",
 ]
 
+REPOSITORY_PATHS = [
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "manifest.txt",
+    "scripts/validate.py",
+    ".github/workflows/validate.yml",
+]
+
+REQUIRED_PATHS = REPOSITORY_PATHS + INSTALL_PATHS
 ALLOWED_PUBLIC_ADAPTERS = {"jira"}
 MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 EMAIL_RE = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.IGNORECASE)
@@ -93,6 +100,18 @@ SENSITIVE_PATTERNS = {
     "aws-access-key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
     "bearer-token": re.compile(r"\bBearer\s+[A-Za-z0-9._~+/=-]{24,}\b", re.IGNORECASE),
 }
+
+# Construct these at runtime so the public repository does not itself contain
+# the disallowed vendor/platform names as contiguous text.
+FORBIDDEN_PUBLIC_PLATFORM_TERMS = [
+    ("regional-platform-1", "".join(("yun", "xiao"))),
+    ("regional-platform-2", "".join(("proj", "ex"))),
+    ("regional-platform-3", "".join(("code", "up"))),
+    ("regional-platform-4", "".join(("ali", "yun"))),
+    ("regional-platform-5", "".join(("alibaba ", "cloud"))),
+    ("regional-platform-6", "".join((chr(0x4E91), chr(0x6548)))),
+    ("regional-platform-7", "".join((chr(0x963F), chr(0x91CC), chr(0x4E91)))),
+]
 
 
 def iter_text_files() -> list[Path]:
@@ -116,6 +135,44 @@ def check_required_paths(errors: list[str]) -> None:
             errors.append(f"missing required path: {relative}")
 
 
+def read_manifest(errors: list[str]) -> list[str]:
+    manifest = ROOT / "manifest.txt"
+    if not manifest.exists():
+        errors.append("missing public install manifest: manifest.txt")
+        return []
+
+    entries: list[str] = []
+    for raw_line in manifest.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        entries.append(line)
+
+    if len(entries) != len(set(entries)):
+        errors.append("manifest.txt contains duplicate paths")
+    return entries
+
+
+def check_manifest(errors: list[str]) -> None:
+    entries = read_manifest(errors)
+    expected = set(INSTALL_PATHS)
+    actual = set(entries)
+
+    missing = sorted(expected - actual)
+    extra = sorted(actual - expected)
+    if missing:
+        errors.append(f"manifest.txt missing install paths: {', '.join(missing)}")
+    if extra:
+        errors.append(f"manifest.txt contains unapproved install paths: {', '.join(extra)}")
+
+    for relative in entries:
+        path = ROOT / relative
+        if not path.exists():
+            errors.append(f"manifest path does not exist: {relative}")
+        elif not path.is_file():
+            errors.append(f"manifest entry is not a file: {relative}")
+
+
 def check_public_adapters(errors: list[str]) -> None:
     adapters = ROOT / "adapters"
     actual = {p.name for p in adapters.iterdir() if p.is_dir()}
@@ -132,7 +189,7 @@ def check_canonical_version(errors: list[str]) -> None:
         errors.append("SKILL.md is missing the independent pre-coding review gate")
 
 
-def check_sensitive_text(files: list[Path], errors: list[str]) -> None:
+def check_public_text_policy(files: list[Path], errors: list[str]) -> None:
     for path in files:
         text = path.read_text(encoding="utf-8")
         relative = path.relative_to(ROOT)
@@ -141,6 +198,10 @@ def check_sensitive_text(files: list[Path], errors: list[str]) -> None:
         for label, pattern in SENSITIVE_PATTERNS.items():
             if pattern.search(text):
                 errors.append(f"sensitive pattern ({label}) found in: {relative}")
+        folded = text.casefold()
+        for label, needle in FORBIDDEN_PUBLIC_PLATFORM_TERMS:
+            if needle.casefold() in folded:
+                errors.append(f"forbidden public platform term ({label}) found in: {relative}")
 
 
 def normalize_link(raw: str) -> str:
@@ -185,9 +246,10 @@ def main() -> int:
     files = iter_text_files()
 
     check_required_paths(errors)
+    check_manifest(errors)
     check_public_adapters(errors)
     check_canonical_version(errors)
-    check_sensitive_text(files, errors)
+    check_public_text_policy(files, errors)
     check_markdown_links(files, errors)
 
     if errors:
