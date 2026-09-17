@@ -6,6 +6,11 @@ A stage-gated software development lifecycle for AI coding agents, with requirem
 > **Canonical workflow:** [`SKILL.md`](SKILL.md)  
 > **中文说明:** [`README.zh-CN.md`](README.zh-CN.md)
 
+## Shinns Lab
+
+Shinns Lab 已入驻爱发电，持续分享 AI 开发实战、工程工作流与真实项目经验。  
+爱发电主页：https://afdian.com/a/shinnslab
+
 ## Why this exists
 
 AI coding agents can write code quickly, but speed does not remove the need for product scope, acceptance criteria, interaction design, architecture, data/API contracts, test strategy, change control, or release authority.
